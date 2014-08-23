@@ -5,21 +5,16 @@
 *      Author: david
 */
 #include "Elevator.h"
+#include <stdio.h>
 
-void ElevatorTest();
 
-int main()
+void AddDeleteTest()
 {
-	ElevatorTest();
-	return 0;
-}
-
-
-void ElevatorTest()
-{
+	ListNodePtr startPtr = NULL;
 	Request r;
-	r.floor = 1;
 	r.elevatorFloor = 3;
-	
+	r.floor = 1;
+	insert(&startPtr, r);
+	printList(startPtr);
 
 }

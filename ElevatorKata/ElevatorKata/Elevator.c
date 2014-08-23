@@ -69,7 +69,7 @@ void printList(ListNodePtr currentPtr)
 		puts("The list contains:");
 		while (currentPtr != NULL)
 		{
-			printf("%n Floor:", currentPtr->data.floor);
+			printf("%d Floor:", currentPtr->data.floor);
 			currentPtr = currentPtr->nextPtr;
 		}
 		puts("NULL\n");
