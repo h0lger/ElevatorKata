@@ -8,10 +8,17 @@
 #ifndef ELEVATOR_H_
 #define ELEVATOR_H_
 
+enum DirectionEnum
+{
+	down,
+	up
+};
+
 typedef struct
 {
-	short floor; //requested floor
-	short elevatorFloor; //the current position when the request was made
+	short Floor; //requested floor	
+	short ElevatorFloor; //the current position when the request was made
+	enum DirectionEnum Direction;
 }
 Request;
 

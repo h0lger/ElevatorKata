@@ -28,7 +28,7 @@ void insert(ListNodePtr *sPtr, Request value)
 		previousPtr = NULL;
 		currentPtr = *sPtr;
 
-		while (currentPtr != NULL && value.floor != currentPtr->data.floor)
+		while (currentPtr != NULL && (value.Floor != currentPtr->data.Floor && value.ElevatorFloor != currentPtr->data.ElevatorFloor))
 		{
 			previousPtr = currentPtr;
 			currentPtr = currentPtr->nextPtr;
@@ -68,8 +68,9 @@ void printList(ListNodePtr currentPtr)
 	{
 		puts("The list contains:");
 		while (currentPtr != NULL)
-		{
-			printf("%d Floor:", currentPtr->data.floor);
+		{			
+			printf_s("Floor: %d direction: %s from: %d",
+				currentPtr->data.Floor, currentPtr->data.Direction, currentPtr->data.ElevatorFloor);
 			currentPtr = currentPtr->nextPtr;
 		}
 		puts("NULL\n");
