@@ -16,8 +16,7 @@ enum DirectionEnum
 
 typedef struct
 {
-	short Floor; //requested floor	
-	short ElevatorFloor; //the current position when the request was made
+	short Floor; //requested floor		
 	enum DirectionEnum Direction;
 }
 Request;
@@ -38,6 +37,8 @@ void insert(ListNodePtr *sPtr, Request value);
 void delete(ListNodePtr *sPtr, Request value);
 int isEmpty(ListNodePtr currentPtr);
 void printList(ListNodePtr currentPtr);
+const char* getDirection(enum DirectionEnum dir);
+Request createRequest(short floor, enum DirectionEnum dir);
 
 
 #endif /* ELEVATOR_H_ */

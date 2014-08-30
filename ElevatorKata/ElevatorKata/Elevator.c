@@ -28,7 +28,7 @@ void insert(ListNodePtr *sPtr, Request value)
 		previousPtr = NULL;
 		currentPtr = *sPtr;
 
-		while (currentPtr != NULL && (value.Floor != currentPtr->data.Floor && value.ElevatorFloor != currentPtr->data.ElevatorFloor))
+		while (currentPtr != NULL && (value.Floor != currentPtr->data.Floor))
 		{
 			previousPtr = currentPtr;
 			currentPtr = currentPtr->nextPtr;
@@ -66,13 +66,37 @@ void printList(ListNodePtr currentPtr)
 	}
 	else
 	{
-		puts("The list contains:");
+		puts("Requested floors:");
 		while (currentPtr != NULL)
 		{			
-			printf_s("Floor: %d direction: %s from: %d",
-				currentPtr->data.Floor, currentPtr->data.Direction, currentPtr->data.ElevatorFloor);
+			printf_s("[%d - %s]",
+				currentPtr->data.Floor, getDirection(currentPtr->data.Direction));
 			currentPtr = currentPtr->nextPtr;
 		}
-		puts("NULL\n");
+		puts("");
 	}
+}
+
+const char* getDirection(enum DirectionEnum dir)
+{
+	switch (dir)
+	{
+	case down:
+		return "down";
+		break;
+	case up:
+		return "up";
+		break;
+	default:
+		return "NOT_DEFINED";
+		break;
+	}
+}
+
+//Create request
+Request createRequest(short floor, enum DirectionEnum dir)
+{
+	Request r;
+	r.Floor = floor;
+	r.Direction = dir;
 }

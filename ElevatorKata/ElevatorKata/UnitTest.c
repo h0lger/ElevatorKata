@@ -11,9 +11,8 @@
 void AddDeleteTest()
 {
 	ListNodePtr startPtr = NULL;
-	Request r;
-	r.ElevatorFloor = 3;
-	r.Floor = 1;	
+	Request r = createRequest(10, up);	
+	
 	insert(&startPtr, r);
 	printList(startPtr);
 
