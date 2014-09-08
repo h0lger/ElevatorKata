@@ -1,23 +1,23 @@
-/*
-* Elevator.h
-*
-*  Created on: Aug 20, 2014
-*      Author: david
-*/
-
 #ifndef ELEVATOR_H_
 #define ELEVATOR_H_
 
 enum DirectionEnum
 {
-	down,
-	up
+	down = 0,
+	up = 1
 };
+
+typedef enum
+{
+	false = 0,
+	true = 1
+} bool;
 
 typedef struct
 {
 	short Floor; //requested floor		
 	enum DirectionEnum Direction;
+	bool IsOutsideCall;
 }
 Request;
 
@@ -34,11 +34,13 @@ typedef listNode ListNode;
 typedef ListNode *ListNodePtr;
 
 void insert(ListNodePtr *sPtr, Request value);
-void delete(ListNodePtr *sPtr, Request value);
+short delete(ListNodePtr *sPtr, Request value);
 int isEmpty(ListNodePtr currentPtr);
 void printList(ListNodePtr currentPtr);
 const char* getDirection(enum DirectionEnum dir);
-Request createRequest(short floor, enum DirectionEnum dir);
+const char* getOutsideCall(bool isOutsideCall);
+
+Request createRequest(short floor, enum DirectionEnum dir, bool isOutsideCall);
 
 
 #endif /* ELEVATOR_H_ */
