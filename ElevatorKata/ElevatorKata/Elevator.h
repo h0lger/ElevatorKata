@@ -38,6 +38,8 @@ void insert(ListNodePtr *sPtr, Request value);
 short delete(ListNodePtr *sPtr, Request value);
 int isEmpty(ListNodePtr currentPtr);
 void printList(ListNodePtr currentPtr);
+Request getFirst(ListNodePtr currentPtr);
+Request getFirstByFloor(ListNodePtr currentPtr, short floor);
 
 //Elevator
 const char* getDirection(enum DirectionEnum dir);

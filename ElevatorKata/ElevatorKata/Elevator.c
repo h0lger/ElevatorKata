@@ -82,7 +82,6 @@ short delete(ListNodePtr *sPtr, Request value)
 	return deleted; //0 if none is deleted
 }
 
-//TODO Not implemented
 int isEmpty(ListNodePtr sPtr)
 {
 	return sPtr == NULL;
@@ -112,6 +111,33 @@ void printList(ListNodePtr currentPtr)
 		}
 		puts("\n");
 	}
+}
+
+//Returns first request in list
+Request getFirst(ListNodePtr currentPtr)
+{
+	if (isEmpty(currentPtr))
+		puts("Error null value passed");
+
+	return currentPtr->data;
+}
+
+//Get first by floor
+Request getFirstByFloor(ListNodePtr currentPtr, short floor)
+{
+	Request req;
+
+	if (isEmpty(currentPtr))
+		puts("Error null value passed");
+
+	while (currentPtr != NULL)
+	{
+		if (currentPtr->data.Floor == floor)
+			return req = currentPtr->data;
+		currentPtr = currentPtr->nextPtr;
+	}
+	//Return NULL if not found
+	return req;
 }
 
 //Get direction as text
