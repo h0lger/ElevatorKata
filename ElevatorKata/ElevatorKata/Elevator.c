@@ -18,7 +18,7 @@ void insert(ListNodePtr *sPtr, Request value)
 		previousPtr = NULL;
 		currentPtr = *sPtr;
 
-		while (currentPtr != NULL && (value.Floor != currentPtr->data.Floor))
+		while (currentPtr != NULL && !areEqual(value, currentPtr->data))
 		{
 			previousPtr = currentPtr;
 			currentPtr = currentPtr->nextPtr;
@@ -50,9 +50,8 @@ short delete(ListNodePtr *sPtr, Request value)
 	ListNodePtr tmpPtr;
 	short deleted = 0;
 
-	//Delete first node
-	//TODO: Create hash instead of looking att only floor
-	if (value.Floor == (*sPtr)->data.Floor)
+	//Delete first node	
+	if (areEqual(value,(*sPtr)->data))
 	{
 		tmpPtr = *sPtr; //save it temporary
 		*sPtr = (*sPtr)->nextPtr; //de-thread the node
@@ -64,9 +63,8 @@ short delete(ListNodePtr *sPtr, Request value)
 		previousPtr = *sPtr;
 		currentPtr = (*sPtr)->nextPtr;
 
-		//Loop to find the correct location in the list
-		//TODO: Create hash instead of looking att only floor
-		while (currentPtr != NULL && currentPtr->data.Floor != value.Floor)
+		//Loop to find the correct location in the list		
+		while (currentPtr != NULL && !areEqual(currentPtr->data, value))
 		{
 			previousPtr = currentPtr;
 			currentPtr = currentPtr->nextPtr;
@@ -84,13 +82,16 @@ short delete(ListNodePtr *sPtr, Request value)
 	return deleted; //0 if none is deleted
 }
 
+//TODO Not implemented
 int isEmpty(ListNodePtr sPtr)
 {
 	return sPtr == NULL;
 }
 
+//Print contents of the list
 void printList(ListNodePtr currentPtr)
 {
+	short counter = 0;
 	if (isEmpty(currentPtr))
 	{
 		puts("List is empty\n");
@@ -99,18 +100,21 @@ void printList(ListNodePtr currentPtr)
 	{
 		puts("Requested floors:");
 		while (currentPtr != NULL)
-		{			
-			printf_s("[%d - %s - outside call: %s]",
+		{
+			counter++;
+			printf_s("%d. [%d - %s - outside call: %s]\n",
+				counter,
 				currentPtr->data.Floor,
 				getDirection(currentPtr->data.Direction), 
 				getOutsideCall(currentPtr->data.IsOutsideCall)
 				);
 			currentPtr = currentPtr->nextPtr;
 		}
-		puts("");
+		puts("\n");
 	}
 }
 
+//Get direction as text
 const char* getDirection(enum DirectionEnum dir)
 {
 	switch (dir)
@@ -127,6 +131,7 @@ const char* getDirection(enum DirectionEnum dir)
 	}
 }
 
+//Get isOutsideCall as text
 const char* getOutsideCall(bool isOutsideCall)
 {	
 	
@@ -145,4 +150,17 @@ Request createRequest(short floor, enum DirectionEnum dir, bool isOutsideCall)
 	r.IsOutsideCall = isOutsideCall;
 
 	return r;
+}
+
+//Compare 2 request structs to check if they are equal
+bool areEqual(Request req1, Request req2)
+{
+	if (req1.Direction != req2.Direction)
+		return false;
+	else if (req1.Floor != req2.Floor)
+		return false;
+	else if (req1.IsOutsideCall != req2.IsOutsideCall)
+		return false;
+	else
+		return true;
 }

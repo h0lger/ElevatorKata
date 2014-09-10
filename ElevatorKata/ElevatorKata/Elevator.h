@@ -33,14 +33,17 @@ listNode;
 typedef listNode ListNode;
 typedef ListNode *ListNodePtr;
 
+//Linked list
 void insert(ListNodePtr *sPtr, Request value);
 short delete(ListNodePtr *sPtr, Request value);
 int isEmpty(ListNodePtr currentPtr);
 void printList(ListNodePtr currentPtr);
+
+//Elevator
 const char* getDirection(enum DirectionEnum dir);
 const char* getOutsideCall(bool isOutsideCall);
-
 Request createRequest(short floor, enum DirectionEnum dir, bool isOutsideCall);
+bool areEqual(Request req1, Request req2);
 
 
 #endif /* ELEVATOR_H_ */
