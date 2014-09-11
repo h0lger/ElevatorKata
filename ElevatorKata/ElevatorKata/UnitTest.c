@@ -1,4 +1,4 @@
-#include "Elevator.h"
+﻿#include "Elevator.h"
 #include <stdio.h>
 
 
@@ -30,4 +30,22 @@ void AddDeleteTest()
 	delete(&startPtr, r); //Delete floor 11
 	printList(startPtr); //3 requests floor 7, 15	
 
+}
+
+//Advanced tests
+//3: Elevator @ 10 → 1(up) Q: 5(down) Ex: 5, 1
+void AdvTestOutside3()
+{
+	//Initialize queue
+	ListNodePtr startPtr = NULL;
+	//Insert 1
+	Request r = createRequest(1, up, true);
+	insert(&startPtr, r);
+	r = createRequest(5, down, true);
+	insert(&startPtr, r);
+	//Init position
+	setCurrentFloor(10);
+	setCurrentDirection(down);
+	printList(startPtr);
+	nextRequest(startPtr);
 }

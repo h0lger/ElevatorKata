@@ -2,5 +2,6 @@
 #define UnitTest_h_
 
 void AddDeleteTest();
+void AdvTestOutside3();
 
 #endif

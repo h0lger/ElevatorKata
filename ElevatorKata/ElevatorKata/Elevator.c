@@ -195,20 +195,51 @@ bool areEqual(Request req1, Request req2)
 		return true;
 }
 
-bool nextRequest(ListNodePtr *currentPtr)
+bool nextRequest(ListNodePtr currentPtr)
 {
+	short n = 0;
+	short n2 = 0;
+	short order[MAX_ARRAY_SIZE];
+	short rest[MAX_ARRAY_SIZE];
+
 	//no more requests
 	if (isEmpty(currentPtr))
 		return false;
 
 	if (_currentDirection == down)
 	{
-		
+		//loop all requests
+		while (currentPtr != NULL)
+		{
+			//Any pick-ups on the way down?
+			if (currentPtr->data.Direction == down && currentPtr->data.Floor <= _currentFloor)
+			{
+				order[n] = currentPtr->data.Floor;
+				n++;
+			}
+			else
+			{
+				rest[n2] = currentPtr->data.Floor;
+				n2++;
+			}
+			currentPtr = currentPtr->nextPtr;
+		} //end loop
+		orderDesc(order);
 	}
 	else if (_currentDirection == up)
 	{
 
 	}
+}
+
+void setCurrentFloor(short currentFloor)
+{
+	_currentFloor = currentFloor;
+}
+
+void setCurrentDirection(enum DirectionEnum dir)
+{
+	_currentDirection = dir;
 }
 
 void orderDesc(short *arr[])

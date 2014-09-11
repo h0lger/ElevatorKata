@@ -47,10 +47,13 @@ const char* getDirection(enum DirectionEnum dir);
 const char* getOutsideCall(bool isOutsideCall);
 Request createRequest(short floor, enum DirectionEnum dir, bool isOutsideCall);
 bool areEqual(Request req1, Request req2);
-bool nextRequest(ListNodePtr *currentptr);
+bool nextRequest(ListNodePtr currentptr);
+void setCurrentFloor(short currentFloor);
+void setCurrentDirection(enum DirectionEnum dir);
 
 //Utils
 void orderDesc(short *arr[]);
+int cmpfunc(const void * a, const void * b);
 
 
 #endif /* ELEVATOR_H_ */
