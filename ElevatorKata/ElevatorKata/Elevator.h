@@ -1,5 +1,6 @@
 #ifndef ELEVATOR_H_
 #define ELEVATOR_H_
+#define MAX_ARRAY_SIZE 10
 
 enum DirectionEnum
 {
@@ -46,6 +47,10 @@ const char* getDirection(enum DirectionEnum dir);
 const char* getOutsideCall(bool isOutsideCall);
 Request createRequest(short floor, enum DirectionEnum dir, bool isOutsideCall);
 bool areEqual(Request req1, Request req2);
+bool nextRequest(ListNodePtr *currentptr);
+
+//Utils
+void orderDesc(short *arr[]);
 
 
 #endif /* ELEVATOR_H_ */

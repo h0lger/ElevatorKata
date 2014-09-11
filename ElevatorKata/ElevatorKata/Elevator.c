@@ -2,6 +2,10 @@
 #include "Elevator.h"
 #include <stdlib.h>
 
+//Variables
+short _currentFloor = 0;
+enum DirectionEnum _currentDirection = up;
+
 void insert(ListNodePtr *sPtr, Request value)
 {
 	ListNodePtr newPtr; //new one
@@ -189,4 +193,31 @@ bool areEqual(Request req1, Request req2)
 		return false;
 	else
 		return true;
+}
+
+bool nextRequest(ListNodePtr *currentPtr)
+{
+	//no more requests
+	if (isEmpty(currentPtr))
+		return false;
+
+	if (_currentDirection == down)
+	{
+		
+	}
+	else if (_currentDirection == up)
+	{
+
+	}
+}
+
+void orderDesc(short *arr[])
+{
+	short newArr[MAX_ARRAY_SIZE];
+	qsort(arr, MAX_ARRAY_SIZE, sizeof(short), cmpfunc);
+}
+
+int cmpfunc(const void * a, const void * b)
+{
+	return (*(int*)a - *(int*)b);
 }

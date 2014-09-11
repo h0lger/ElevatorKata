@@ -28,6 +28,6 @@ void AddDeleteTest()
 	printList(startPtr); //3 requests floor 7, 11, 15
 	r = getFirstByFloor(startPtr, 11);
 	delete(&startPtr, r); //Delete floor 11
-	printList(startPtr); //3 requests floor 7, 15
+	printList(startPtr); //3 requests floor 7, 15	
 
 }
