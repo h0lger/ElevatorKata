@@ -195,16 +195,15 @@ bool areEqual(Request req1, Request req2)
 		return true;
 }
 
-bool nextRequest(ListNodePtr currentPtr)
+void nextRequest(ListNodePtr currentPtr, short * order)
 {
 	short n = 0;
-	short n2 = 0;
-	short order[MAX_ARRAY_SIZE];
-	short rest[MAX_ARRAY_SIZE];
+	short n2 = 0;	
+	short rest[MAX_ARRAY_SIZE];		
 
 	//no more requests
 	if (isEmpty(currentPtr))
-		return false;
+		return order;
 
 	if (_currentDirection == down)
 	{
@@ -217,7 +216,7 @@ bool nextRequest(ListNodePtr currentPtr)
 				order[n] = currentPtr->data.Floor;
 				n++;
 			}
-			else
+			else //we put in the rest
 			{
 				rest[n2] = currentPtr->data.Floor;
 				n2++;
@@ -230,6 +229,13 @@ bool nextRequest(ListNodePtr currentPtr)
 	{
 
 	}
+
+	//Put the rest at the end
+	for (size_t i = 0; i < n2; i++)
+	{
+		order[n] = rest[i];
+		n++;
+	}		
 }
 
 void setCurrentFloor(short currentFloor)
@@ -237,9 +243,19 @@ void setCurrentFloor(short currentFloor)
 	_currentFloor = currentFloor;
 }
 
+short getCurrentFloor()
+{
+	return _currentFloor;
+}
+
 void setCurrentDirection(enum DirectionEnum dir)
 {
 	_currentDirection = dir;
+}
+
+enum DirectionEnum getCurrentDirection()
+{
+	return _currentDirection;
 }
 
 void orderDesc(short *arr[])

@@ -1,6 +1,26 @@
 ﻿#include "Elevator.h"
 #include <stdio.h>
+#include <assert.h>
 
+void printElevatorInfo()
+{
+	printf_s("Elevator@%d", getCurrentFloor());
+	printf_s(" going %s\n\n", getDirection(getCurrentDirection()));
+}
+
+void printOrder(short * order)
+{
+	puts("Order:");
+	short array_size = (sizeof(order) / sizeof(short));
+	for (size_t i = 0; i < array_size; i++)
+	{
+		if (i > 0)
+			printf(", %d", order[i]);
+		else
+			printf_s("%d", order[i]);
+	}
+	puts("");
+}
 
 //Simple add, deletion test
 void AddDeleteTest()
@@ -36,6 +56,7 @@ void AddDeleteTest()
 //3: Elevator @ 10 → 1(up) Q: 5(down) Ex: 5, 1
 void AdvTestOutside3()
 {
+	short order[MAX_ARRAY_SIZE];
 	//Initialize queue
 	ListNodePtr startPtr = NULL;
 	//Insert 1
@@ -44,8 +65,16 @@ void AdvTestOutside3()
 	r = createRequest(5, down, true);
 	insert(&startPtr, r);
 	//Init position
-	setCurrentFloor(10);
+	setCurrentFloor(10);	
 	setCurrentDirection(down);
+	
+	printElevatorInfo();
 	printList(startPtr);
-	nextRequest(startPtr);
+	nextRequest(startPtr, &order);
+
+	//Validate
+	assert(order[0] == 5);
+	assert(order[1] == 1);
+
+	printOrder(&order);
 }

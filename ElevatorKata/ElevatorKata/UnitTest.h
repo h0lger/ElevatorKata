@@ -1,7 +1,13 @@
 #ifndef UnitTest_h_
 #define UnitTest_h_
 
-void AddDeleteTest();
-void AdvTestOutside3();
+//utils
+void printElevatorInfo();
+void printOrder(short * order);
+
+//unit tests
+void addDeleteTest();
+void advTestOutside3();
+
 
 #endif
