@@ -54,8 +54,9 @@ void setCurrentDirection(enum DirectionEnum dir);
 enum DirectionEnum getCurrentDirection();
 
 //Utils
-void orderDesc(short *arr[]);
-int cmpfunc(const void * a, const void * b);
+void orderArr(short *arr[], short sortOption);
+int cmpFuncDesc(const void * a, const void * b);
+int cmpFuncAsc(const void * a, const void * b);
 
 
 #endif /* ELEVATOR_H_ */

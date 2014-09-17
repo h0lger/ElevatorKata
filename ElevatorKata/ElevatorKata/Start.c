@@ -3,6 +3,7 @@
 int main()
 {
 	//AddDeleteTest();
-	AdvTestOutside3();
+	advTestOutside3();
+	//advTestOutside4();
 	return 0;
 }

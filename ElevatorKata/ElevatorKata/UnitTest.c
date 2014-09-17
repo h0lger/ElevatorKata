@@ -23,7 +23,7 @@ void printOrder(short * order)
 }
 
 //Simple add, deletion test
-void AddDeleteTest()
+void addDeleteTest()
 {	
 	ListNodePtr startPtr = NULL;
 	//Insert 1
@@ -54,7 +54,7 @@ void AddDeleteTest()
 
 //Advanced tests
 //3: Elevator @ 10 → 1(up) Q: 5(down) Ex: 5, 1
-void AdvTestOutside3()
+void advTestOutside3()
 {
 	short order[MAX_ARRAY_SIZE];
 	//Initialize queue
@@ -75,6 +75,32 @@ void AdvTestOutside3()
 	//Validate
 	assert(order[0] == 5);
 	assert(order[1] == 1);
+
+	printOrder(&order);
+}
+
+//4: Elevator @ 10 →  5(up)Q:1(up)Ex : 1, 5
+void advTestOutside4()
+{
+	short order[2];
+	//Initialize queue
+	ListNodePtr startPtr = NULL;
+	//Insert 1
+	Request r = createRequest(5, up, true);
+	insert(&startPtr, r);
+	r = createRequest(1, up, true);
+	insert(&startPtr, r);
+	//Init position
+	setCurrentFloor(10);
+	setCurrentDirection(down);
+
+	printElevatorInfo();
+	printList(startPtr);
+	nextRequest(startPtr, &order);
+
+	//Validate
+	assert(order[0] == 1);
+	assert(order[1] == 5);
 
 	printOrder(&order);
 }

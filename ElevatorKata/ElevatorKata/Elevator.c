@@ -199,7 +199,11 @@ void nextRequest(ListNodePtr currentPtr, short * order)
 {
 	short n = 0;
 	short n2 = 0;	
-	short rest[MAX_ARRAY_SIZE];		
+	//short length = sizeof(order) / sizeof(short);
+	//short* rest; //pointer to array
+	//rest = malloc(length * sizeof *rest);
+	short rest[MAX_ARRAY_SIZE];
+	
 
 	//no more requests
 	if (isEmpty(currentPtr))
@@ -223,13 +227,14 @@ void nextRequest(ListNodePtr currentPtr, short * order)
 			}
 			currentPtr = currentPtr->nextPtr;
 		} //end loop
-		orderDesc(order);
+		orderArr(order, 1);
 	}
 	else if (_currentDirection == up)
 	{
 
 	}
-
+	
+	//orderArr(rest, 0);
 	//Put the rest at the end
 	for (size_t i = 0; i < n2; i++)
 	{
@@ -258,13 +263,22 @@ enum DirectionEnum getCurrentDirection()
 	return _currentDirection;
 }
 
-void orderDesc(short *arr[])
-{
-	short newArr[MAX_ARRAY_SIZE];
-	qsort(arr, MAX_ARRAY_SIZE, sizeof(short), cmpfunc);
+//sortOption 0 = ascending
+//sortOption 1 = descending
+void orderArr(short *arr[], short sortOption)
+{	
+	if (sortOption == 0)
+		qsort(arr, MAX_ARRAY_SIZE, sizeof(short), cmpFuncAsc);
+	else
+		qsort(arr, MAX_ARRAY_SIZE, sizeof(short), cmpFuncDesc);
 }
 
-int cmpfunc(const void * a, const void * b)
+int cmpFuncAsc(const void * a, const void * b)
+{
+	return (*(int*)b - *(int*)a);
+}
+
+int cmpFuncDesc(const void * a, const void * b)
 {
 	return (*(int*)a - *(int*)b);
 }
