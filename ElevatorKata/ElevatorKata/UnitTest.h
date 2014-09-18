@@ -3,12 +3,12 @@
 
 //utils
 void printElevatorInfo();
-void printOrder(short * order);
+void printOrder(short * order, short arrSize);
 
 //unit tests
 void addDeleteTest();
 void advTestOutside3();
-//void advTestOutside4();
-
+void advTestOutside4();
+void advTestOutside5();
 
 #endif

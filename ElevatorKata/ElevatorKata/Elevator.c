@@ -195,15 +195,13 @@ bool areEqual(Request req1, Request req2)
 		return true;
 }
 
-void nextRequest(ListNodePtr currentPtr, short * order)
+void nextRequest(ListNodePtr currentPtr, short * order, short arrSize)
 {
 	short n = 0;
 	short n2 = 0;	
-	//short length = sizeof(order) / sizeof(short);
-	//short* rest; //pointer to array
-	//rest = malloc(length * sizeof *rest);
-	short rest[MAX_ARRAY_SIZE];
-	
+	//dynamic array	
+	short* rest; //pointer to array
+	rest = calloc(arrSize, sizeof(short));
 
 	//no more requests
 	if (isEmpty(currentPtr))
@@ -227,20 +225,24 @@ void nextRequest(ListNodePtr currentPtr, short * order)
 			}
 			currentPtr = currentPtr->nextPtr;
 		} //end loop
-		orderArr(order, 1);
+				
+		orderArr(order, 1, n); //sort descending
 	}
 	else if (_currentDirection == up)
 	{
-
+		//TODO
 	}
-	
-	//orderArr(rest, 0);
+		
+	orderArr(rest, 0, n2); //sort ascending
+
 	//Put the rest at the end
 	for (size_t i = 0; i < n2; i++)
 	{
 		order[n] = rest[i];
 		n++;
-	}		
+	}
+
+	free(rest);
 }
 
 void setCurrentFloor(short currentFloor)
@@ -265,20 +267,24 @@ enum DirectionEnum getCurrentDirection()
 
 //sortOption 0 = ascending
 //sortOption 1 = descending
-void orderArr(short *arr[], short sortOption)
-{	
-	if (sortOption == 0)
-		qsort(arr, MAX_ARRAY_SIZE, sizeof(short), cmpFuncAsc);
-	else
-		qsort(arr, MAX_ARRAY_SIZE, sizeof(short), cmpFuncDesc);
-}
-
-int cmpFuncAsc(const void * a, const void * b)
+void orderArr(short *arr, short sortOption, short nElements)
 {
-	return (*(int*)b - *(int*)a);
+	//sort if there is something to sort
+	if (nElements > 1)
+	{
+		if (sortOption == 0)
+			qsort(arr, nElements, sizeof(short), cmpFuncAsc);
+		else
+			qsort(arr, nElements, sizeof(short), cmpFuncDesc);
+	}
 }
 
 int cmpFuncDesc(const void * a, const void * b)
 {
-	return (*(int*)a - *(int*)b);
+	return (*(short*)b - *(short*)a);
+}
+
+int cmpFuncAsc(const void * a, const void * b)
+{
+	return (*(short*)a - *(short*)b);
 }

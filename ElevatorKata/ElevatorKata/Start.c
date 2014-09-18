@@ -2,8 +2,9 @@
 
 int main()
 {
-	//AddDeleteTest();
+	addDeleteTest();
 	advTestOutside3();
-	//advTestOutside4();
+	advTestOutside4();
+	advTestOutside5();
 	return 0;
 }
