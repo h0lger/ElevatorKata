@@ -10,5 +10,7 @@ void addDeleteTest();
 void advTestOutside3();
 void advTestOutside4();
 void advTestOutside5();
+void advTestOutside6();
+void advTestOutside6_1();
 
 #endif
