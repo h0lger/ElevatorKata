@@ -3,6 +3,11 @@
 #include <assert.h>
 #include <stdlib.h>
 
+void printHeader(char *text)
+{
+	printf_s("-- %s ----------------------------------------------\n", text);
+}
+
 void printElevatorInfo()
 {
 	printf_s("Elevator@%d", getCurrentFloor());
@@ -25,6 +30,8 @@ void printOrder(short * order, short arrSize)
 //Simple add, deletion test
 void addDeleteTest()
 {
+	printHeader("AddDeleteTest");
+
 	//Init
 	ListNodePtr startPtr = NULL;
 	Request r;
@@ -60,6 +67,7 @@ void addDeleteTest()
 //3: Elevator @ 10 → 1(up) Q: 5(down) Ex: 5, 1
 void advTestOutside3()
 {
+	printHeader("AdvTest3");
 	static const int arrSize = 2;
 	short order[2];
 	//Initialize queue
@@ -91,6 +99,7 @@ void advTestOutside3()
 //4: Elevator @ 10 →  5(up)Q:1(up)Ex : 1, 5
 void advTestOutside4()
 {
+	printHeader("AdvTest4");
 	static const int arrSize = 2;
 	short order[2];
 	//Initialize queue
@@ -122,6 +131,7 @@ void advTestOutside4()
 //5: Elevator @ 10 → 1(up)Q: 3(down), 5(down)Ex : 5, 3, 1
 void advTestOutside5()
 {
+	printHeader("AdvTest5");
 	static const int arrSize = 3;
 	short* order; //pointer to dynamic array
 	order = calloc(arrSize, sizeof(short));
@@ -157,6 +167,7 @@ void advTestOutside5()
 //6: Elevator @ 10 → 5(up) Q: 3(up), 1(up) Ex: 3, 1, 5
 void advTestOutside6()
 {
+	printHeader("AdvTest6");
 	static const int arrSize = 3;
 	short* order; //pointer to dynamic array
 	order = calloc(arrSize, sizeof(short));
@@ -193,6 +204,7 @@ void advTestOutside6()
 //6.1: Elevator @ 3 → 8 Q: 1(up), 5(up)Ex : 5, 8, 1
 void advTestOutside6_1()
 {
+	printHeader("AdvTest6.1");
 	static const int arrSize = 3;
 	short* order; //pointer to dynamic array
 	order = calloc(arrSize, sizeof(short));
@@ -220,6 +232,39 @@ void advTestOutside6_1()
 	assert(order[0] == 5);
 	assert(order[1] == 8);
 	assert(order[2] == 1);
+
+	printOrder(order, arrSize);
+	free(startPtr);
+}
+
+//7: Elevator @ 19 → 18(up) Q:1(down) Ex: 1, 18
+void advTestOutside7()
+{
+	printHeader("AdvTest7");
+	static const int arrSize = 2;
+	short* order; //pointer to dynamic array
+	order = calloc(arrSize, sizeof(short));
+	//Initialize queue
+	ListNodePtr startPtr = NULL;
+	Request r;
+
+	//Create requests
+	r = createRequest(18, up, true);
+	insert(&startPtr, r);
+	r = createRequest(1, down, true);
+	insert(&startPtr, r);	
+
+	//Init position
+	setCurrentFloor(19);
+	setCurrentDirection(down);
+
+	printElevatorInfo();
+	printList(startPtr);
+	nextRequest(startPtr, order, arrSize);
+
+	////Validate	
+	assert(order[0] == 1);
+	assert(order[1] == 18);	
 
 	printOrder(order, arrSize);
 	free(startPtr);

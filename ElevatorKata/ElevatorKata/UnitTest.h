@@ -2,6 +2,7 @@
 #define UnitTest_h_
 
 //utils
+void printHeader(char *text);
 void printElevatorInfo();
 void printOrder(short * order, short arrSize);
 
@@ -12,5 +13,6 @@ void advTestOutside4();
 void advTestOutside5();
 void advTestOutside6();
 void advTestOutside6_1();
+void advTestOutside7();
 
 #endif

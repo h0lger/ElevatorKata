@@ -230,7 +230,22 @@ void nextRequest(ListNodePtr currentPtr, short * order, short arrSize)
 	}
 	else if (_currentDirection == up)
 	{
-		//TODO
+		while (currentPtr != NULL)
+		{
+			//Any pick-ups on the way up?
+			if (currentPtr->data.Direction == up && currentPtr->data.Floor >= _currentFloor)
+			{
+				order[n] = currentPtr->data.Floor;
+				n++;
+			}
+			else
+			{
+				rest[n2] = currentPtr->data.Floor;
+				n2++;
+			}
+			currentPtr = currentPtr->nextPtr;
+		}//end loop
+		orderArr(order, 0, n); //sort ascending
 	}
 		
 	orderArr(rest, 0, n2); //sort ascending
