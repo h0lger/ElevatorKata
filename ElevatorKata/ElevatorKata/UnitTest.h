@@ -14,5 +14,6 @@ void advTestOutside5();
 void advTestOutside6();
 void advTestOutside6_1();
 void advTestOutside7();
+void advTestOutside9();
 
 #endif

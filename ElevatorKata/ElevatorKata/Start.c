@@ -9,5 +9,6 @@ int main()
 	advTestOutside6();
 	advTestOutside6_1();
 	advTestOutside7();
+	advTestOutside9();
 	return 0;
 }

@@ -269,3 +269,35 @@ void advTestOutside7()
 	printOrder(order, arrSize);
 	free(startPtr);
 }
+
+void advTestOutside9()
+{
+	printHeader("AdvTest9");
+	static const int arrSize = 2;
+	short* order; //pointer to dynamic array
+	order = calloc(arrSize, sizeof(short));
+	//Initialize queue
+	ListNodePtr startPtr = NULL;
+	Request r;
+
+	//Create requests
+	r = createRequest(5, up, false);
+	insert(&startPtr, r);
+	r = createRequest(6, up, false);
+	insert(&startPtr, r);
+
+	//Init position
+	setCurrentFloor(1);
+	setCurrentDirection(up);
+
+	printElevatorInfo();
+	printList(startPtr);
+	nextRequest(startPtr, order, arrSize);
+
+	////Validate	
+	assert(order[0] == 5);
+	assert(order[1] == 6);
+
+	printOrder(order, arrSize);
+	free(startPtr);
+}
